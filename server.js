@@ -22,14 +22,16 @@ const db = knex({
 
 const app = express();
 
-app.use(cors({
-  origin: "https://smartbrain-frontend-eight.vercel.app",
-}));
+const corsOptions = { 
+  origin: 'https://smartbrain-frontend-eight.vercel.app', 
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', credentials: true, optionsSuccessStatus: 204 
+}; 
+
+app.use(cors(corsOptions));
 
 app.use (express.json());
-app.use (cors());
 
-app.get('/', (req, res) => {res.send(db.users)})
+app.get('/', (req, res) => {res.send('Server is running')})
 app.post('/signin', signin.handleSignin(db,bcrypt))
 app.post('/register', register.handleRegister(db, bcrypt))
 app.get('/profile/:id', (req,res) => {profile.handleProfileGet(req, res, db)})
