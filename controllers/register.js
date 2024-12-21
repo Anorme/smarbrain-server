@@ -34,7 +34,7 @@
 		})
 		.catch(err => {
 			console.error(err);
-			res.status(400).json('unable to register');
+			res.status(400).json('unable to register user');
 		});
 }
 
