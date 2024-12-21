@@ -23,11 +23,19 @@
 				.then(user => {
 					res.json(user[0]);
 				})
-				.then(trx.commit)
-				.catch(trx.rollback)
+				.catch(err => {
+					console.error(err);
+					trx.rollback();
+					res.status(400).json('unable to register');
+				});
 			})
-			.catch(err => res.status(400).json('unable to register'))
+			.then(trx.commit)
+			.catch(trx.rollback)
 		})
+		.catch(err => {
+			console.error(err);
+			res.status(400).json('unable to register');
+		});
 }
 
 module.exports = {
