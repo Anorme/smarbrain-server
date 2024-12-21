@@ -22,12 +22,7 @@ const db = knex({
 
 const app = express();
 
-const corsOptions = { 
-  origin: 'https://smartbrain-frontend-eight.vercel.app', 
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', credentials: true, optionsSuccessStatus: 204 
-}; 
-
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use (express.json());
 
