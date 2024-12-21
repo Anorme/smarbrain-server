@@ -2,6 +2,7 @@ const express = require ('express');
 const bcrypt = require('bcrypt-nodejs');
 const cors = require ('cors');
 const knex = require ('knex');
+require('dotenv').config();
 
 const register = require('./controllers/register');
 const signin = require('./controllers/signin');
@@ -11,11 +12,11 @@ const image = require('./controllers/image');
 const db = knex({
   client: 'pg',
   connection: {
-    host: '127.0.0.1',
-    port: 5432,
-    user: 'postgres',
-    password: 'anorme2055',
-    database: 'smart-brain',
+    host: process.env.SUPABASE_HOST,
+    port: process.env.SUPABASE_PORT,
+    user: process.env.SUPABASE_USER,
+    password: process.env.SUPABASE_PASSWORD,
+    database: process.env.SUPABASE_DATABASE,
   },
 });
 
@@ -31,6 +32,7 @@ app.get('/profile/:id', (req,res) => {profile.handleProfileGet(req, res, db)})
 app.put('/image', (req, res) => {image.handleImage(req,res,db)})
 app.post('/imageurl', (req, res) => {image.handleApiCall(req,res)})
 
+const PORT = process.env.PORT || 3000;
 app.listen(3000, () => {
-	console.log('App is running on port 3000');
+	console.log(`App is running on port ${PORT}`);
 })
