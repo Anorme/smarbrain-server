@@ -2,7 +2,7 @@ const handleApiCall = (req, res) => {
 	const {input} = req.body;
 	const returnClarifaiRequestOptions = (imageUrl) => {
 	// Your PAT (Personal Access Token) can be found in the Account's Security section
-	const PAT = '8a4236b3f4d3405b9f00726ab019cdf8';
+	const PAT = process.env.CLARIFAI_PAT;
 	// Specify the correct user_id/app_id pairings
 	// Since you're making inferences outside your app's scope
 	const USER_ID = 'urcd8k814b2u';   
