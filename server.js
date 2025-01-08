@@ -2,6 +2,7 @@ const express = require ('express');
 const bcrypt = require('bcrypt-nodejs');
 const cors = require ('cors');
 const knex = require ('knex');
+const morgan = require('morgan');
 require('dotenv').config();
 
 const register = require('./controllers/register');
@@ -22,8 +23,8 @@ const db = knex({
 
 const app = express();
 
+app.use(morgan('combined'));
 app.use(cors());
-
 app.use (express.json());
 
 app.get('/', (req, res) => {res.send('Server is running')})
