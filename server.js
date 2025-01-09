@@ -2,7 +2,6 @@ const express = require ('express');
 const bcrypt = require('bcrypt-nodejs');
 const cors = require ('cors');
 const knex = require ('knex');
-const morgan = require('morgan');
 require('dotenv').config();
 
 const register = require('./controllers/register');
@@ -22,10 +21,9 @@ const db = knex({
 });
 
 const app = express();
-console.log('ACTIVE!!');
+
 app.use(cors());
 app.use (express.json());
-app.use(morgan('combined'));
 
 app.get('/', (req, res) => {res.send('Server is running')})
 app.post('/signin', signin.handleSignin(db,bcrypt))
