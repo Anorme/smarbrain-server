@@ -22,10 +22,10 @@ const db = knex({
 });
 
 const app = express();
-
-app.use(morgan('combined'));
+console.log('ACTIVE!!');
 app.use(cors());
 app.use (express.json());
+app.use(morgan('combined'));
 
 app.get('/', (req, res) => {res.send('Server is running')})
 app.post('/signin', signin.handleSignin(db,bcrypt))
