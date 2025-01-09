@@ -1,13 +1,27 @@
 version: '3.6'
 
 services:
+
+  #Backend API
   smartbrain-server:
     container_name: backend
-    #image: node:22.9.0 
     build: ./
     command: npm start
     working_dir: /usr/src/smartbrain-server
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: anorme
+      POSTGRES_DB: smartbrain-docker
+      POSTGRES_HOST: postgres
+    links: 
+      -postgres
     ports: 
       - "3000:3000"
     volumes:
       - ./:/usr/src/smartbrain-server 
+
+  #Postgres
+  postgres:
+    image: postgres
+    ports: 
+      - "5432:5432"
